@@ -4,17 +4,27 @@ import Head from "next/head";
 import Image from "next/image";
 import SearchBar from "../components/SearchBar";
 import Skeleton from "../components/Skeleton";
+import Card from "../components/Card";
+import { getSearch } from "../services/omdb";
 
 export default function Home() {
     const [isSearching, setIsSearching] = useState(false);
+    const [resultData, setResultData] = useState([]);
 
-    const handleSearch = (query) => {
-        console.log(query);
+    const handleSearch = async (query) => {
         setIsSearching(true);
 
-        setTimeout(() => {
-            setIsSearching(false);
-        }, 10000);
+        try {
+            const moviesData = await getSearch(query);
+            setResultData(moviesData);
+            console.log(moviesData);
+        } catch (error) {
+            console.error("Failed to fetch movies", error);
+        } finally {
+            setTimeout(() => {
+                setIsSearching(false);
+            }, 3000);
+        }
     };
 
     return (
@@ -29,6 +39,12 @@ export default function Home() {
             <div className="flex flex-col items-center space-y-4">
                 {isSearching ? (
                     <Skeleton className="w-32" />
+                ) : resultData.length > 0 ? (
+                    <div className="w-full grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6">
+                        {resultData.map((movie) => (
+                            <Card key={movie.imdbID} data={movie} />
+                        ))}
+                    </div>
                 ) : (
                     <>
                         <Image
@@ -47,3 +63,4 @@ export default function Home() {
         </>
     );
 }
+
