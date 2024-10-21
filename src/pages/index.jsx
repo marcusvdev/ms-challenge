@@ -46,18 +46,18 @@ export default function Home() {
                         ))}
                     </div>
                 ) : (
-                    <>
+                    <div className="mt-44 text-center flex items-center flex-col">
                         <Image
                             src="/images/empty.png"
                             alt="Don't know what to search?"
                             width={275}
                             height={112}
                         />
-                        <p className="text-white text-2xl font-bold">
+                        <p className="text-white text-2xl font-bold mb-2 mt-6">
                             Don't know what to search?
                         </p>
-                        <p className="text-gray-400">Here's an offer you can't refuse</p>
-                    </>
+                        <p className="text-[#7B8C98] text-base">Here's an offer you can't refuse</p>
+                    </div>
                 )}
             </div>
         </>
