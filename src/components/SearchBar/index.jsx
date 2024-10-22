@@ -1,12 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiSearch } from "react-icons/fi";
+import { IoClose } from "react-icons/io5"; // Ícone de "X" para limpar
 
-export default function SearchBar({ onSearch }) {
+export default function SearchBar({ onSearch, searchQuery }) {
     const [query, setQuery] = useState("");
+
+    useEffect(() => {
+        if (searchQuery) {
+            setQuery(searchQuery);
+        }
+    }, [searchQuery]);
 
     const handleChange = (e) => {
         setQuery(e.target.value);
         onSearch(e.target.value);
+    };
+
+    const handleClear = () => {
+        setQuery("");
+        onSearch("");
     };
 
     return (
@@ -19,6 +31,13 @@ export default function SearchBar({ onSearch }) {
                 value={query}
                 onChange={handleChange}
             />
+
+            {query && (
+                <IoClose
+                    className="absolute right-2 text-[#7B8C98] cursor-pointer"
+                    onClick={handleClear}
+                />
+            )}
         </div>
     );
 }

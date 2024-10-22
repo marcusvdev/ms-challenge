@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import SearchBar from "../components/SearchBar";
@@ -10,20 +10,31 @@ import { getSearch } from "../services/omdb";
 export default function Home() {
     const [isSearching, setIsSearching] = useState(false);
     const [resultData, setResultData] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
+
+    useEffect(() => {
+        const lastQuery = localStorage.getItem("lastSearchQuery");
+        if (lastQuery) {
+            setSearchQuery(lastQuery);
+            handleSearch(lastQuery);
+        }
+    }, []);
 
     const handleSearch = async (query) => {
         setIsSearching(true);
+        setSearchQuery(query);
+
+        localStorage.setItem("lastSearchQuery", query);
 
         try {
             const moviesData = await getSearch(query);
             setResultData(moviesData);
-            console.log(moviesData);
         } catch (error) {
-            console.error("Failed to fetch movies", error);
+            console.error("Failed to fetch", error);
         } finally {
             setTimeout(() => {
                 setIsSearching(false);
-            }, 3000);
+            }, 2000);
         }
     };
 
@@ -34,13 +45,13 @@ export default function Home() {
                 <meta name="description" content="Movies and Series | Challenge" />
             </Head>
 
-            <SearchBar onSearch={handleSearch} />
+            <SearchBar onSearch={handleSearch} searchQuery={searchQuery} />
 
-            <div className="flex flex-col items-center space-y-4">
+            <div className="flex flex-col items-center space-y-4 mt-6">
                 {isSearching ? (
                     <Skeleton className="w-32" />
                 ) : resultData.length > 0 ? (
-                    <div className="w-full grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6">
+                    <div className="w-full grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 xl:gap-8">
                         {resultData.map((movie) => (
                             <Card key={movie.imdbID} data={movie} />
                         ))}
