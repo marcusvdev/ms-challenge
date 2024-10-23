@@ -1,3 +1,4 @@
+import React from 'react';
 import { isFavorite } from "../../services/favorites";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,9 +24,9 @@ export default function Card({ data }) {
                 <div className="absolute inset-0 flex flex-col justify-between items-center bg-[#192228] bg-opacity-90 text-white rounded-xl transition-opacity duration-300 opacity-0 group-hover:opacity-100"> {/* Alteração aqui */}
                     <div className="w-full flex justify-end p-2">
                         {isFavorite(data.imdbID) ? (
-                            <MdFavorite className="w-6 h-6 text-red-500" />
+                            <MdFavorite className="w-6 h-6 text-red-500" data-testid="favorite-icon" />
                         ) : (
-                            <MdFavoriteBorder className="w-6 h-6 text-gray-300" />
+                            <MdFavoriteBorder className="w-6 h-6 text-gray-300" data-testid="non-favorite-icon" />
                         )}
                     </div>
                     <div className="w-full p-2">
