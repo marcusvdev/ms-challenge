@@ -1,37 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MS-Challenge - Catálogo de Filmes e Séries
 
-## Getting Started
+Este projeto onde o usuário pode buscar por um título, visualizar informações detalhadas sobre ele (como sinopse e avaliações) e marcar como favorito.
+O projeto foi construído com **Next.js**, **API OMDb**, **Tailwind CSS** e **Jest**.
 
-First, run the development server:
+## Funcionalidades Entregues
 
+- Campo de busca pelo título.
+- Informações detalhadas de cada título.
+- Favoritos (ícone de coração).
+- Responsividade.
+- Estados de loading, erro, e quando não há resultados.
+- Testes unitários com Jest.
+
+## Tecnologias Utilizadas
+
+- **Next.js**: Framework React para renderização e construção de páginas dinâmicas.
+- **Tailwind CSS**: Utilizado para estilização da interface.
+- **Axios**: Biblioteca para fazer requisições HTTP à API do OMDb.
+- **Jest**: Framework de testes para garantir a qualidade do código.
+- **React Icons**: Ícones para representar ações como "favoritar".
+
+## Pré-requisitos
+
+- Node.js v14+ e npm ou yarn instalado.
+
+## Instalação
+1. Clone este repositório:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/seu-usuario/ms-challenge.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Acesse o diretório do projeto:
+```bash
+cd ms-challenge
+```
+3. Instale as dependências:
+```bash
+npm install ou yarn install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Configuração
+Crie um arquivo .env.local na raiz do projeto com as seguintes variáveis de ambiente:
+```bash
+NEXT_PUBLIC_APIURL=https://www.omdbapi.com/
+NEXT_PUBLIC_APIKEY=sua_chave_api_aqui
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Scripts Disponíveis
 
-## Learn More
+```bash
+npm run dev / yarn dev 
+```
+Inicia o servidor de desenvolvimento. Abra http://localhost:3000 para ver a aplicação no navegador.
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build / yarn build   
+```
+Cria a versão de produção da aplicação na pasta .next.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run test / yarn test   
+```
+Executa os testes unitários com Jest.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Estrutura do Projeto
 
-## Deploy on Vercel
+```
+├── components     # Componentes reutilizáveis
+│   ├── Card       # Componente Card
+│   ├── SearchBar  # Barra de pesquisa
+│   └── Skeleton   # Skeleton para estado de loading
+├── pages          # Páginas da aplicação
+│   ├── single     # Página de detalhes de cada filme
+│   ├── _app.jsx   # Componente principal do Next.js
+│   └── index.jsx  # Página inicial
+├── services       # Serviços para conexão com a API e Favoritar
+├── styles         # Estilo para iniciar o Tailwind no projeto
+│   └── globals.css
+├── tests          # Testes unitários
+│   ├── components # Testes dos componentes
+│   └── services   # Testes dos serviços
+├── .env           # Variáveis de ambiente (API Key, etc)
+├── jest.config.js # Configuração do Jest
+├── tailwind.config.ts # Configuração do Tailwind CSS
+└── tsconfig.json  # Configuração do TypeScript
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# ms-challenge
+```
