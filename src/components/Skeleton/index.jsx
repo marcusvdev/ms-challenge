@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Skeleton = () => {
     return (
         <div className="w-full flex items-stretch justify-start gap-4">

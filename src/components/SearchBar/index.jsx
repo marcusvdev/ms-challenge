@@ -1,6 +1,7 @@
+import React from 'react';
 import { useState, useEffect } from "react";
 import { FiSearch } from "react-icons/fi";
-import { IoClose } from "react-icons/io5"; // Ícone de "X" para limpar
+import { IoClose } from "react-icons/io5";
 
 export default function SearchBar({ onSearch, searchQuery }) {
     const [query, setQuery] = useState("");
@@ -36,6 +37,8 @@ export default function SearchBar({ onSearch, searchQuery }) {
                 <IoClose
                     className="absolute right-2 text-[#7B8C98] cursor-pointer"
                     onClick={handleClear}
+                    role="button"
+                    aria-label="Clear search"
                 />
             )}
         </div>

@@ -66,23 +66,23 @@ Executa os testes unitários com Jest.
 ## Estrutura do Projeto
 
 ```
-├── components     # Componentes reutilizáveis
-│   ├── Card       # Componente Card
-│   ├── SearchBar  # Barra de pesquisa
-│   └── Skeleton   # Skeleton para estado de loading
-├── pages          # Páginas da aplicação
-│   ├── single     # Página de detalhes de cada filme
-│   ├── _app.jsx   # Componente principal do Next.js
-│   └── index.jsx  # Página inicial
-├── services       # Serviços para conexão com a API e Favoritar
-├── styles         # Estilo para iniciar o Tailwind no projeto
+├── components         # Componentes reutilizáveis
+│   ├── Card           # Componente Card
+│   ├── SearchBar      # Barra de pesquisa
+│   └── Skeleton       # Skeleton para estado de loading
+├── pages              # Páginas da aplicação
+│   ├── single         # Página de detalhes de cada filme
+│   ├── _app.jsx       # Componente principal do Next.js
+│   └── index.jsx      # Página inicial
+├── services           # Serviços para conexão com a API e Favoritar
+├── styles             # Estilo para iniciar o Tailwind no projeto
 │   └── globals.css
-├── tests          # Testes unitários
-│   ├── components # Testes dos componentes
-│   └── services   # Testes dos serviços
-├── .env           # Variáveis de ambiente (API Key, etc)
-├── jest.config.js # Configuração do Jest
+├── tests              # Testes unitários
+│   ├── components     # Testes dos componentes
+│   └── services       # Testes dos serviços
+├── .env               # Variáveis de ambiente (API Key, etc)
+├── jest.config.js     # Configuração do Jest
 ├── tailwind.config.ts # Configuração do Tailwind CSS
-└── tsconfig.json  # Configuração do TypeScript
+└── tsconfig.json      # Configuração do TypeScript
 
 ```

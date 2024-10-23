@@ -1,3 +1,4 @@
+import React from 'react';
 import Layout from "../templates/Layout";
 import "../styles/globals.css";
 

@@ -1,3 +1,4 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Card from '../../components/Card';
 import { isFavorite } from '../../services/favorites';
@@ -9,26 +10,42 @@ jest.mock('../../services/favorites', () => ({
 
 describe('Card component', () => {
     const mockData = {
-        imdbID: 'tt1375666',
-        Title: 'Inception',
-        Year: '2010',
-        Poster: 'https://example.com/inception.jpg',
+        imdbID: 'tt0944947',
+        Title: 'Game of Thrones',
+        Year: '2011–2019',
+        Poster: 'https://m.media-amazon.com/images/M/MV5BOGY3NTg1ODMtOGIzZS00YWFiLTgzYzktNzBiYWZkYjcwNGRhXkEyXkFqcGc@._V1_SX300.jpg',
+        Rated: 'TV-MA',
+        Released: '17 Apr 2011',
+        Runtime: '57 min',
+        Genre: 'Action, Adventure, Drama',
+        Director: 'N/A',
+        Writer: 'David Benioff, D.B. Weiss',
+        Actors: 'Emilia Clarke, Peter Dinklage, Kit Harington',
+        Plot: 'Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia.',
+        Language: 'English',
+        Country: 'United States, United Kingdom',
+        Awards: 'Won 59 Primetime Emmys. 397 wins & 655 nominations total',
+        Ratings: [{ Source: 'Internet Movie Database', Value: '9.2/10' }],
+        imdbRating: '9.2',
+        imdbVotes: '2,348,679',
+        Type: 'series',
+        totalSeasons: '8',
+        Response: 'True',
     };
 
     it('should render the movie title and year', () => {
         render(<Card data={mockData} />);
-
-        const titleElement = screen.getByText(/inception/i);
-        const yearElement = screen.getByText(/2010/i);
+        const titleElement = screen.getByText(mockData.Title);
+        const yearElement = screen.getByText(/2011–2019/i);
         expect(titleElement).toBeInTheDocument();
         expect(yearElement).toBeInTheDocument();
     });
 
     it('should render the movie poster when available', () => {
         render(<Card data={mockData} />);
-        const imageElement = screen.getByAltText('Inception');
+        const imageElement = screen.getByAltText(mockData.Title);
         expect(imageElement).toBeInTheDocument();
-        expect(imageElement).toHaveAttribute('src', mockData.Poster);
+        expect(imageElement).toHaveAttribute('src', expect.stringContaining(encodeURIComponent(mockData.Poster)));
     });
 
     it('should display title if the poster is not available', () => {
@@ -37,7 +54,7 @@ describe('Card component', () => {
             Poster: 'N/A',
         };
         render(<Card data={mockDataNoPoster} />);
-        const titleFallback = screen.getByText(/inception/i);
+        const titleFallback = screen.getByText(mockData.Title, { selector: 'h3' });
         expect(titleFallback).toBeInTheDocument();
     });
 
